@@ -57,7 +57,7 @@ class MyHomePage extends StatelessWidget {
                   default:
                     if (snapshot.hasError)
                       return Text(
-                          'Falha ao Gerar Token, Error: ${snapshot.error}');
+                          '${snapshot.error}');
                     else
                       return Center(
                         child: Column(
@@ -88,8 +88,4 @@ class MyHomePage extends StatelessWidget {
 ```kotlin
  Enviroment.PRODUCAO
 ```
-
-- Caso as credenciais informadas ao SDK não sejam validas, o retorno será uma Exception,
- informando o Status Code, Status Message e os Detalhes da Messagem.
-
 
