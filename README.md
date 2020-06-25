@@ -1,4 +1,4 @@
-# OAUTH /braspag_oauth_dart)
+# OAUTH /braspag_oauth_dart
 
 Library em Dart para auxiliar na obtenção do AccessToken para OAuth Braspag, podendo ser usada em Flutter ou Dart.
 
@@ -83,9 +83,8 @@ class MyHomePage extends StatelessWidget {
 
 **Observações**:
 
-- Caso queira que o ambiente seja **PRODUÇÃO** é obrigatorio usar:
+- Caso queira que o ambiente seja **PRODUÇÃO** é obrigatorio informar:
 
-```kotlin
- Enviroment.PRODUCAO
-```
+ enviroment: **Enviroment.PRODUCAO**
+
 
