@@ -26,19 +26,31 @@ class MyHomePage extends StatelessWidget {
           children: <Widget>[
             FutureBuilder<BraspagOAuth>(
               future: BraspagOAuth.getToken(
-                  clientId: "CLIENT ID",
-                  clientSecret: "CLIENT SECRET",
-                  enviroment: Enviroment.SANDBOX),
+                  clientId: "SEU CLIENT ID",
+                  clientSecret: "SEU CLIENT SECRET",
+                  enviroment: OAuthEnviroment.SANDBOX),
               builder: (context, AsyncSnapshot snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.waiting:
                     return Center(child: CircularProgressIndicator());
                   default:
-                    if (snapshot.hasError)
+                    if (snapshot.hasError) {
+                      OAuthException errors = snapshot.error;
+                      print("--------------------------------------");
+                      print('Status => ${errors.message}');
+                      print(
+                          'Retorno OAuth => Error: ${errors.errorsOAuth.error}, Error Description: ${errors.errorsOAuth.errorDescription}');
+                      print("--------------------------------------");
                       return Center(
-                        child: Text('${snapshot.error}'),
+                        child: Column(
+                          children: <Widget>[
+                            Text('Status => ${errors.message}'),
+                            Text(
+                                'Retorno OAuth => Error: ${errors.errorsOAuth.error}, Error Description: ${errors.errorsOAuth.errorDescription}'),
+                          ],
+                        ),
                       );
-                    else
+                    } else
                       return Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,

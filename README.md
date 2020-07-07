@@ -81,10 +81,4 @@ class MyHomePage extends StatelessWidget {
 
 ```
 
-**Observações**:
-
-- Caso queira que o ambiente seja **PRODUÇÃO** é obrigatorio informar:
-
- enviroment: **Enviroment.PRODUCAO**
-
 

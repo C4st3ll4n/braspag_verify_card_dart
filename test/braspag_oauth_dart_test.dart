@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:braspag_oauth_dart/braspag_oauth_dart.dart';
-import 'package:braspag_oauth_dart/src/braspag_oauth_api.dart';
+import 'package:braspag_oauth_dart/src/OAuthClient.dart';
 import 'package:dio/dio.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
@@ -11,13 +11,13 @@ class DioAdapterMock extends Mock implements HttpClientAdapter {}
 main() {
   group("Testes de retorno da BraspagOAuth", () {
     final Dio dio = Dio();
-    BraspagOAuthApi braspagOAuth;
+    OAuthClient braspagOAuth;
     DioAdapterMock dioAdapterMock;
 
     setUp(() {
       dioAdapterMock = DioAdapterMock();
       dio.httpClientAdapter = dioAdapterMock;
-      braspagOAuth = BraspagOAuthApi(dio);
+      braspagOAuth = OAuthClient(dio);
     });
 
     var id = "39fe0f51-e774-4390-86e7-d4b62a4b477a";
@@ -54,7 +54,9 @@ main() {
               }));
 
       var response = await braspagOAuth.getAccessToken(
-          clientId: id, clientSecret: secret, enviroment: Enviroment.SANDBOX);
+          clientId: id,
+          clientSecret: secret,
+          enviroment: OAuthEnviroment.SANDBOX);
 
       expect(response, isA<BraspagOAuth>());
     });
@@ -62,7 +64,9 @@ main() {
     //test sending all parameters
     test("Enviando Todos Parâmetros", () async {
       var response = await BraspagOAuth.getToken(
-          clientId: id, clientSecret: secret, enviroment: Enviroment.SANDBOX);
+          clientId: id,
+          clientSecret: secret,
+          enviroment: OAuthEnviroment.SANDBOX);
       expect(response, isA<BraspagOAuth>());
     });
 
@@ -86,7 +90,9 @@ main() {
     // calling production with sandbox credentials
     test("Credenciais de Sandbox chamando Produção", () async {
       var response = BraspagOAuth.getToken(
-          clientId: id, clientSecret: secret, enviroment: Enviroment.PRODUCAO);
+          clientId: id,
+          clientSecret: secret,
+          enviroment: OAuthEnviroment.PRODUCAO);
       expect(response, isA<Future<BraspagOAuth>>());
     });
 

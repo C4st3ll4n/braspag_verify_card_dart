@@ -1,5 +1,5 @@
 import 'package:braspag_oauth_dart/braspag_oauth_dart.dart';
-import 'package:braspag_oauth_dart/src/braspag_oauth_api.dart';
+import 'package:braspag_oauth_dart/src/OAuthClient.dart';
 import 'package:dio/dio.dart';
 
 class BraspagOAuth {
@@ -26,9 +26,9 @@ class BraspagOAuth {
   static Future<BraspagOAuth> getToken(
       {String clientId,
       String clientSecret,
-      Enviroment enviroment = Enviroment.SANDBOX}) async {
+      OAuthEnviroment enviroment = OAuthEnviroment.SANDBOX}) {
     Dio dio = Dio();
-    return BraspagOAuthApi(dio).getAccessToken(
+    return OAuthClient(dio).getAccessToken(
         clientId: clientId, clientSecret: clientSecret, enviroment: enviroment);
   }
 }
