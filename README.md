@@ -17,9 +17,9 @@ Library em Dart para auxiliar na obtenção do AccessToken para OAuth Braspag, p
 
 Para utilizar do SDK será necessário informar client id, client secret (validos) e o enviroment:
 
-**String client_id** = Obrigatorio.
-**String client_secret** = Obrigatorio.
-**OAuthEnviroment enviroment** = Não Obrigatorio, caso não seja informado o SDK ultilizará **SANDBOX**.
+- **String client_id** = Obrigatorio.
+- **String client_secret** = Obrigatorio.
+- **OAuthEnviroment enviroment** = Não Obrigatorio, caso não seja informado o SDK ultilizará **SANDBOX**.
 
 ```dart
 import 'package:braspag_oauth_dart/braspag_oauth_dart.dart';
