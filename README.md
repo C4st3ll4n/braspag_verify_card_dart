@@ -15,11 +15,11 @@ Library em Dart para auxiliar na obtenção do AccessToken para OAuth Braspag, p
 
 ### Exemplo de Utilização
 
-Para utilizar do SDK será necessário informar client id, client secret (validos) e o ambiente:
+Para utilizar do SDK será necessário informar client id, client secret (validos) e o enviroment:
 
 **String client_id** = Obrigatorio.
 **String client_secret** = Obrigatorio.
-**Enviroment ambiente** = Não Obrigatorio, caso não seja informado o SDK ultilizará **SANDBOX**.
+**OAuthEnviroment enviroment** = Não Obrigatorio, caso não seja informado o SDK ultilizará **SANDBOX**.
 
 ```dart
 import 'package:braspag_oauth_dart/braspag_oauth_dart.dart';
@@ -32,6 +32,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Demo OAuth Braspag',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
       home: MyHomePage(),
     );
   }
@@ -47,18 +50,31 @@ class MyHomePage extends StatelessWidget {
           children: <Widget>[
             FutureBuilder<BraspagOAuth>(
               future: BraspagOAuth.getToken(
-                  clientId: "SEUCLIENTID",
-                  clientSecret: "SEUCLIENTSECRET",
-                  enviroment: Enviroment.SANDBOX),
-              builder: (context, snapshot) {
+                  clientId: "SEU CLIENT ID",
+                  clientSecret: "SEU CLIENT SECRET",
+                  enviroment: OAuthEnviroment.SANDBOX),
+              builder: (context, AsyncSnapshot snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.waiting:
-                    return CircularProgressIndicator();
+                    return Center(child: CircularProgressIndicator());
                   default:
-                    if (snapshot.hasError)
-                      return Text(
-                          '${snapshot.error}');
-                    else
+                    if (snapshot.hasError) {
+                      OAuthException errors = snapshot.error;
+                      print("--------------------------------------");
+                      print('Status => ${errors.message}');
+                      print(
+                          'Retorno OAuth => Error: ${errors.errorsOAuth.error}, Error Description: ${errors.errorsOAuth.errorDescription}');
+                      print("--------------------------------------");
+                      return Center(
+                        child: Column(
+                          children: <Widget>[
+                            Text('Status => ${errors.message}'),
+                            Text(
+                                'Retorno OAuth => Error: ${errors.errorsOAuth.error}, Error Description: ${errors.errorsOAuth.errorDescription}'),
+                          ],
+                        ),
+                      );
+                    } else
                       return Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -78,6 +94,7 @@ class MyHomePage extends StatelessWidget {
     );
   }
 }
+
 
 ```
 
