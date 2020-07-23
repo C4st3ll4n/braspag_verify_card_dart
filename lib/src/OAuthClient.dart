@@ -31,9 +31,8 @@ class OAuthClient {
     } on DioError catch (e) {
       _getErrorDio(e);
     } catch (e) {
-      throw OAuthException(
-          OAuthError(error: "unknown", errorDescription: "unknown"),
-          "Falha ao tentar obter credenciais");
+      throw ErrorResponseOAuth(
+          code: "Unknown Error", message: "Falha ao tentar obter credenciais");
     }
     return null;
   }
@@ -50,9 +49,10 @@ _getErrorDio(DioError e) {
     Map<String, dynamic> map = e.response.data;
     OAuthError errorsOAuth = OAuthError.fromJson(map);
 
-    throw OAuthException(errorsOAuth, e.message);
+    throw ErrorResponseOAuth(
+        code: "${e.response.statusCode} ${e.response.statusMessage}",
+        message: errorsOAuth.errorDescription);
   } else {
-    throw OAuthException(
-        OAuthError(error: "unknown", errorDescription: "unknown"), e.message);
+    throw ErrorResponseOAuth(code: e.message, message: "Unknown Error");
   }
 }
