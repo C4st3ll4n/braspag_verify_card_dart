@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:braspag_oauth_dart/braspag_oauth_dart.dart';
+import 'package:braspag_oauth_dart/oauth.dart';
 import 'package:braspag_oauth_dart/src/BraspagOAuth.dart';
 import 'package:braspag_oauth_dart/src/OAuthEnviroment.dart';
 import 'package:braspag_oauth_dart/src/OAuthError.dart';

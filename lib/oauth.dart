@@ -1,4 +1,4 @@
-library braspag_oauth_dart;
+library oauth;
 
 export 'src/BraspagOAuth.dart';
 export 'src/ErrorResponseOAuth.dart';

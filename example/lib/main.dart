@@ -1,4 +1,4 @@
-import 'package:braspag_oauth_dart/braspag_oauth_dart.dart';
+import 'package:braspag_oauth_dart/oauth.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -25,7 +25,7 @@ class MyHomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             FutureBuilder<BraspagOAuth>(
-              future: BraspagOAuth.getToken(
+              future: getToken(
                   clientId: "CLIENT ID",
                   clientSecret: "CLIENT SECRET",
                   enviroment: OAuthEnviroment.SANDBOX),
@@ -60,4 +60,10 @@ class MyHomePage extends StatelessWidget {
       ),
     );
   }
+}
+
+Future<BraspagOAuth> getToken(
+    {String clientId, String clientSecret, OAuthEnviroment enviroment}) async {
+  return await BraspagOAuth.getToken(
+      clientId: clientId, clientSecret: clientSecret, enviroment: enviroment);
 }
