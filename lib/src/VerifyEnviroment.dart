@@ -1,0 +1,1 @@
+enum VerifyEnviroment { SANDBOX, PRODUCAO }
