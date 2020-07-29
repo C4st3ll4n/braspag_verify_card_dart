@@ -17,8 +17,7 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
-  braspag_verify_card_dart:
-    path: /Users/felipe/Desktop/braspag_verify_card_dart
+  braspag_verify_card_dart: ^1.0.0
 
   flutter:
     sdk: flutter
