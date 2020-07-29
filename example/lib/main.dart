@@ -88,6 +88,8 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 Future<VerifyCardResponse> sendCard() async {
+  //TODO PLACE YOUR CREDENTIALS HERE
+
   var verifyCard = VerifyCard(
       clientId: "Client Id",
       clientSecret: "Client Secret",
