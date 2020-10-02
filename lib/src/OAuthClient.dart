@@ -1,8 +1,6 @@
 import 'dart:convert';
 
 import 'package:braspag_oauth_dart/oauth.dart';
-import 'package:braspag_oauth_dart/src/BraspagOAuth.dart';
-import 'package:braspag_oauth_dart/src/OAuthEnviroment.dart';
 import 'package:braspag_oauth_dart/src/OAuthError.dart';
 import 'package:dio/dio.dart';
 
@@ -13,7 +11,7 @@ class OAuthClient {
   Future<BraspagOAuth> getAccessToken(
       {String clientId,
       String clientSecret,
-      OAuthEnviroment enviroment}) async {
+      OAuthEnvironment environment}) async {
     try {
       String basicAuth =
           'Basic ' + base64Encode(utf8.encode('$clientId:$clientSecret'));
@@ -21,7 +19,7 @@ class OAuthClient {
       Map<String, String> body = {'grant_type': 'client_credentials'};
 
       dio.options
-        ..baseUrl = baseUrl(enviroment)
+        ..baseUrl = baseUrl(environment)
         ..headers["content-type"] = "application/x-www-form-urlencoded"
         ..headers["authorization"] = basicAuth;
 
@@ -38,8 +36,8 @@ class OAuthClient {
   }
 }
 
-String baseUrl(OAuthEnviroment enviroment) {
-  return enviroment == OAuthEnviroment.PRODUCAO
+String baseUrl(OAuthEnvironment enviroment) {
+  return enviroment == OAuthEnvironment.PRODUCTION
       ? "https://auth.braspag.com.br/"
       : "https://authsandbox.braspag.com.br/";
 }
@@ -50,7 +48,7 @@ _getErrorDio(DioError e) {
     OAuthError errorsOAuth = OAuthError.fromJson(map);
 
     throw ErrorResponseOAuth(
-        code: "${e.response.statusCode} ${e.response.statusMessage}",
+        code: "${e.response.statusCode}",
         message: errorsOAuth.errorDescription);
   } else {
     throw ErrorResponseOAuth(code: e.message, message: "Unknown Error");

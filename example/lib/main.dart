@@ -28,7 +28,7 @@ class MyHomePage extends StatelessWidget {
               future: getToken(
                   clientId: "CLIENT ID",
                   clientSecret: "CLIENT SECRET",
-                  enviroment: OAuthEnviroment.SANDBOX),
+                  enviroment: OAuthEnvironment.SANDBOX),
               builder: (context, AsyncSnapshot snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.waiting:
@@ -63,7 +63,7 @@ class MyHomePage extends StatelessWidget {
 }
 
 Future<BraspagOAuth> getToken(
-    {String clientId, String clientSecret, OAuthEnviroment enviroment}) async {
+    {String clientId, String clientSecret, OAuthEnvironment enviroment}) async {
   return await BraspagOAuth.getToken(
-      clientId: clientId, clientSecret: clientSecret, enviroment: enviroment);
+      clientId: clientId, clientSecret: clientSecret, environment: enviroment);
 }

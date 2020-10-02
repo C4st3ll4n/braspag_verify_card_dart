@@ -56,7 +56,7 @@ main() {
       var response = await braspagOAuth.getAccessToken(
           clientId: id,
           clientSecret: secret,
-          enviroment: OAuthEnviroment.SANDBOX);
+          environment: OAuthEnvironment.SANDBOX);
 
       expect(response, isA<BraspagOAuth>());
     });
@@ -66,7 +66,7 @@ main() {
       var response = await BraspagOAuth.getToken(
           clientId: id,
           clientSecret: secret,
-          enviroment: OAuthEnviroment.SANDBOX);
+          environment: OAuthEnvironment.SANDBOX);
       expect(response, isA<BraspagOAuth>());
     });
 
@@ -89,17 +89,23 @@ main() {
 
     // calling production with sandbox credentials
     test("Credenciais de Sandbox chamando Produção", () async {
-      var response = BraspagOAuth.getToken(
-          clientId: id,
-          clientSecret: secret,
-          enviroment: OAuthEnviroment.PRODUCAO);
-      expect(response, isA<Future<BraspagOAuth>>());
+      try {
+        await BraspagOAuth.getToken(
+            clientId: id,
+            clientSecret: secret,
+            environment: OAuthEnvironment.PRODUCTION);
+      } on ErrorResponseOAuth catch (e) {
+        expect(e.code, '400');
+      }
     });
 
     // error test client invalid
     test("Client Invalido", () async {
-      var response = BraspagOAuth.getToken(clientId: "", clientSecret: "");
-      expect(response, isA<Future<BraspagOAuth>>());
+      try {
+        await BraspagOAuth.getToken(clientId: "", clientSecret: "");
+      } on ErrorResponseOAuth catch (e) {
+        expect(e.code, '400');
+      }
     });
   });
 }

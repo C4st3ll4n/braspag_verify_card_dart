@@ -26,9 +26,9 @@ class BraspagOAuth {
   static Future<BraspagOAuth> getToken(
       {String clientId,
       String clientSecret,
-      OAuthEnviroment enviroment = OAuthEnviroment.SANDBOX}) {
+      OAuthEnvironment environment = OAuthEnvironment.SANDBOX}) {
     Dio dio = Dio();
     return OAuthClient(dio).getAccessToken(
-        clientId: clientId, clientSecret: clientSecret, enviroment: enviroment);
+        clientId: clientId, clientSecret: clientSecret, environment: environment);
   }
 }

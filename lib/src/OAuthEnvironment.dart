@@ -1,0 +1,1 @@
+enum OAuthEnvironment { SANDBOX, PRODUCTION }

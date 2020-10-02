@@ -10,7 +10,7 @@ Library em Dart para auxiliar na obtenção do AccessToken para OAuth Braspag, p
 
 ```yaml
     dependencies:
-      braspag_oauth_dart: ^1.1.0
+      braspag_oauth_dart: ^1.1.1
 ```
 
 ### Utilização
@@ -24,13 +24,13 @@ Será necessário também informar *Client Id*, *Client Secret* e o *Ambiente*:
 
 - **String Client Id** = Obrigatório.
 - **String Client Secret** = Obrigatório.
-- **OAuthEnviroment Enviroment** = Não Obrigatório, caso não seja informado o SDK ultilizará **SANDBOX**.
+- **OAuthEnvironment Environment** = Não Obrigatório, caso não seja informado o SDK ultilizará **SANDBOX**.
 
 ### Obtendo Token
 
 ```dart
  await BraspagOAuth.getToken(
-      clientId: "CLIENT ID", clientSecret: "CLIENT SECRET", enviroment: OAuthEnviroment.SANDBOX);
+      clientId: "CLIENT ID", clientSecret: "CLIENT SECRET", enviroment: OAuthEnvironment.SANDBOX);
 ```
 ### Detalhamento Retorno de Erro
 

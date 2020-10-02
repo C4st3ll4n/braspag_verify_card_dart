@@ -18,8 +18,7 @@ environment:
 
 dependencies:
 
-  braspag_oauth_dart:
-    path: /Users/felipe/Documents/CODE/braspag_oauth_dart
+  braspag_oauth_dart: ^1.1.1
   flutter:
     sdk: flutter
 
